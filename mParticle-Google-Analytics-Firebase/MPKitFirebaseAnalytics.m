@@ -221,14 +221,7 @@ const NSInteger FIR_MAX_CHARACTERS_IDENTITY_ATTR_VALUE_INDEX = 35;
 }
 
 - (MPKitExecStatus *)logScreen:(MPEvent *)event {
-    if (!event || !event.name) {
-        return [self execStatus:MPKitReturnCodeFail];
-    }
-
-    event.name = [self standardizeNameOrKey:event.name forEvent:YES];
-    [FIRAnalytics logEventWithName:kFIREventScreenView parameters:@{kFIRParameterScreenName: event.name}];
-    
-    return [self execStatus:MPKitReturnCodeSuccess];
+    return [self routeEvent:event]
 }
 
 - (MPKitExecStatus *)routeEvent:(MPEvent *)event {
